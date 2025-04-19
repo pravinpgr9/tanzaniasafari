@@ -54,13 +54,13 @@ router.post("/", async (req, res) => {
     }
 
     // Optional phone number validation
-    const phoneRegex = /^\d{10,15}$/;
-    if (!phoneRegex.test(tPhone)) {
-      return res.status(400).json({
-        success: false,
-        message: "Phone number should be between 10 and 15 digits.",
-      });
-    }
+    // const phoneRegex = /^\d{10,15}$/;
+    // if (!phoneRegex.test(tPhone)) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Phone number should be between 10 and 15 digits.",
+    //   });
+    // }
 
     // Check for duplicate enquiry based on name, email, and travelDate
     const duplicate = await tourism_enquiry.findOne({
