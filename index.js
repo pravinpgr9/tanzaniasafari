@@ -16,6 +16,9 @@ const postRoute = require('./routes/posts')
 const verifyRoute = require('./routes/emailverify')
 const linkedRoute = require('./routes/linkedpost')
 
+
+const tourism_enquiryRoute = require('./routes/tourism_enquiry')
+
 dotenv.config();
 
 // Connect to MongoDB using the new connection string and options
@@ -39,12 +42,14 @@ app.use(morgan("common"));
 //     res.send("welcome to rest API")
 // })
 
-app.use("/api/user",userRoute)
-app.use("/api/auth",authRoute)
-app.use("/api/posts",postRoute)
-app.use("/api/emailverify",verifyRoute)
-app.use("/api/posts",postRoute)
-app.use("/api/linkedin",linkedRoute)
+// app.use("/api/user",userRoute)
+// app.use("/api/auth",authRoute)
+// app.use("/api/posts",postRoute)
+// app.use("/api/emailverify",verifyRoute)
+// app.use("/api/posts",postRoute)
+// app.use("/api/linkedin",linkedRoute)
+
+app.use("/api/tourismenquiry",tourism_enquiryRoute)
 
 app.listen(8808, () => {
     console.log("Backend Server is Running on port 8808.");
