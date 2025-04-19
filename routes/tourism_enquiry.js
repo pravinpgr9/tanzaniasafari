@@ -28,7 +28,13 @@ router.post("/", async (req, res) => {
       message: message.trim(),
     };
 
-    const { name: tName, email: tEmail, phone: tPhone, interest: tInterest, travelDate: tTravelDate } = trimmedData;
+    const {
+      name: tName,
+      email: tEmail,
+      phone: tPhone,
+      interest: tInterest,
+      travelDate: tTravelDate,
+    } = trimmedData;
 
     // Validate required fields
     if (!tName || !tEmail || !tPhone || !tInterest || !tTravelDate) {
@@ -56,7 +62,21 @@ router.post("/", async (req, res) => {
       });
     }
 
-    // Save enquiry
+    // Check for duplicate enquiry based on name, email, and travelDate
+    const duplicate = await tourism_enquiry.findOne({
+      name: tName,
+      email: tEmail,
+      travelDate: tTravelDate,
+    });
+
+    if (duplicate) {
+      return res.status(409).json({
+        success: false,
+        message: "Duplicate enquiry already submitted for this travel date.",
+      });
+    }
+
+    // Save new enquiry
     const enquiry = new tourism_enquiry(trimmedData);
     const saved = await enquiry.save();
 
